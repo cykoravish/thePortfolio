@@ -30,14 +30,6 @@ const navLinks = [
     title: "Skills",
     path: "#skills",
   },
-  {
-    title: "Timeline",
-    path: "#timeline",
-  },
-  {
-    title: "Testimonial",
-    path: "#testimonial",
-  },
 ];
 
 const Navbar = () => {

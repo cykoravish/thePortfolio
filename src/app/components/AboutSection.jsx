@@ -7,9 +7,7 @@ import useStore from "../store";
 const AboutSection = () => {
   const [data, setData] = useState("");
   const datas = useStore((state) => state.data);
-  console.log("datas",datas);
   const fetchData = useStore((state) => state.fetchData);
-  console.log(data?.skills?.[0].name);
   const TAB_DATA = [
     {
       title: "Skills",
@@ -44,7 +42,6 @@ const AboutSection = () => {
     },
   ];
 
-
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
 
@@ -54,20 +51,17 @@ const AboutSection = () => {
     });
   };
   useEffect(() => {
-    const getData = async () => {
+    const getData = () => {
       try {
         fetchData();
-        // setData(res.data.user);
-        setData(datas.data.user);
+        setData(datas?.data?.user);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, [ [fetchData]]);
-  // useEffect(() => {
-  //   fetchData();
-  // }, [fetchData]);
+  }, [[fetchData]]);
+
   return (
     <section className="text-white" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
