@@ -14,8 +14,8 @@ const AboutSection = () => {
       id: "skills",
       content: (
         <ul className="list-disc pl-2">
-          {data?.skills?.map((e) => {
-            return <li>{e?.name}</li>;
+          {data?.skills?.map((e,i) => {
+            return <li key={i}>{e?.name}</li>;
           })}
         </ul>
       ),
