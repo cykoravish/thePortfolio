@@ -1,24 +1,13 @@
+/* eslint-disable */
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import useStore from "../store";
 
 const HeroSection = () => {
-  const datas = useStore((state) => state.data);
-  const fetchData = useStore((state) => state.fetchData);
-  useEffect(() => {
-    const getData = () => {
-      try {
-        fetchData();
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
-  }, [fetchData]);
+  
   return (
     <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
