@@ -2,10 +2,13 @@
 import React, { useTransition, useState, useEffect } from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
-import axios from "axios";
+import useStore from "../store";
 
 const AboutSection = () => {
   const [data, setData] = useState("");
+  const datas = useStore((state) => state.data);
+  console.log("datas",datas);
+  const fetchData = useStore((state) => state.fetchData);
   console.log(data?.skills?.[0].name);
   const TAB_DATA = [
     {
@@ -14,7 +17,7 @@ const AboutSection = () => {
       content: (
         <ul className="list-disc pl-2">
           {data?.skills?.map((e) => {
-           return <li>{e?.name}</li>;
+            return <li>{e?.name}</li>;
           })}
         </ul>
       ),
@@ -41,7 +44,6 @@ const AboutSection = () => {
     },
   ];
 
-  // console.log("data is ", data.about.avatar.url);
 
   const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
@@ -54,19 +56,18 @@ const AboutSection = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(
-          "https://portfolio-backend-30mp.onrender.com/api/v1/get/user/65b3a22c01d900e96c4219ae"
-        );
-        setData(res.data.user);
-        // console.log("avatar is ", res.data.user);
-
-        // console.log("avatar is ",data.about.title)
+        fetchData();
+        // setData(res.data.user);
+        setData(datas.data.user);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, []);
+  }, [ [fetchData]]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [fetchData]);
   return (
     <section className="text-white" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
